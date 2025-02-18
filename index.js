@@ -32,4 +32,6 @@ connect();
 app.use(router);
 
 const port = 8000;
-app.listen(port);
+app.listen(port,()=>{
+  console.log("server is start")
+});
