@@ -6,17 +6,19 @@ const fileUpload = require("express-fileupload");
 const router = require("./routers");
 const { connect } = require("./Database/mongoDBConfig");
 
-
+const corsOptions = {
+  origin: 'https://heartify-git-main-24shahins-projects.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
 const app = express();
 // middle waer
 app.use(express.json());
 app.use(
-  cors({
-    origin: "https://heartify-git-main-24shahins-projects.vercel.app",
-    methods: "GET, POST, PUT, DELETE, OPTIONS",
-    allowedHeaders: "Content-Type, Authorization",
-  })
+  cors(corsOptions)
 );
+app.options('*', cors(corsOptions));
 app.use(
   fileUpload({
     useTempFiles: true,
